@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import logo from './assets/company-logo.svg';
+import HomeComponent from './home/home.component';
+import AboutComponent from './about/about.component';
+
+class App extends React.Component {
+
+  render() {
+    return <div className="App">
+      <BrowserRouter>
+        <header className="App-header">
+          <div className="App-logo-box">
+            <img src={logo} className="App-logo" alt="My Company" />
+          </div>
+          <div className="App-nav-box">
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <div className="App-content">
+          <Switch>
+              <Route path="/about">
+                <AboutComponent />
+              </Route>
+              <Route path="/">
+                <HomeComponent name="Dennis" />
+              </Route>
+            </Switch>
+        </div>
+        <footer className="App-footer">
+          The footer
+        </footer>
+      </BrowserRouter>
+    </div>;
+  }
 }
 
 export default App;
